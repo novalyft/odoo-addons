@@ -205,7 +205,7 @@ unchanged.
 
 ## Tests
 
-The module ships with 27 unit tests covering invoice routing, recognition
+The module ships with 22 unit tests covering invoice routing, recognition
 triggers, partial deliveries / backorders, returns, credit notes,
 idempotency, invoice reset reversal, multi-currency (frozen invoice rate),
 service handling (auto / on_invoice / on_delivery), tax separation,

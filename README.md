@@ -22,7 +22,7 @@ credit notes inherit the deferral account.
 - Full audit trail via `x.revenue.recognition.line`; idempotent re-validation.
 - Smart buttons on Sales Order, Customer Invoice, and Stock Picking forms.
 - New report under **Accounting → Reporting → Deferred Revenue**.
-- 27 unit tests.
+- 22 unit tests.
 - Compatible with **Odoo 19 Community and Enterprise**.
 
 See the [module README](./unearned_revenue_recognition/README.md) for the

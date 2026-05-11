@@ -44,7 +44,7 @@ Highlights
   Status (not_started / partial / complete).
 * New report under Accounting → Reporting → Deferred Revenue.
 * Parallel mirrored record rule for "Own Documents Only" salesmen.
-* 27 unit tests covering all edge cases.
+* 22 unit tests covering all edge cases.
 * Compatible with Odoo 19 Community and Enterprise.
 
 Keywords
