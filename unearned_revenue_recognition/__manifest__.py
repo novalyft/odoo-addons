@@ -1,18 +1,31 @@
 {
     "name": "Unearned Revenue Recognition on Delivery",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Accounting/Accounting",
     "summary": "Defer revenue recognition from invoice posting to physical delivery (IFRS 15 / ASC 606).",
     "description": """
-Defers revenue recognition from invoice-posting time to physical-delivery time
-in line with IFRS 15 / ASC 606. Customers are invoiced upfront for AR / payment
-tracking, but the credit side is routed to an Unearned Revenue liability account.
-Revenue is moved from Unearned Revenue to Sales Revenue automatically when the
-corresponding stock picking is validated. Returns reverse the recognition.
-VAT recognition remains on the invoice; only the revenue side is deferred.
+Unearned Revenue Recognition on Delivery
+========================================
+
+Generic, reusable Odoo 19 module that defers revenue recognition from invoice
+posting to physical delivery in line with IFRS 15 / ASC 606. Customers are
+invoiced upfront for AR / payment tracking, but the credit side is routed to
+an Unearned Revenue liability account. Revenue is moved from Unearned Revenue
+to Sales Revenue automatically when the corresponding stock picking is
+validated. Returns post the inverse entry; invoice cancellation reverses the
+recognition.
+
+VAT recognition remains on the invoice (correct per most tax-point rules,
+including the Lebanese / GCC pattern). Only the revenue side is deferred.
+
+Compatible with both Odoo 19 Community and Enterprise. The native
+Enterprise Deferred Revenue Account is detected at runtime and used as the
+third step of the deferral-account fallback chain when account_accountant
+is installed; otherwise the module silently skips that step.
     """,
     "author": "Novalyft Solutions",
     "maintainer": "Novalyft Solutions",
+    "website": "https://novalyft.com",
     "license": "LGPL-3",
     "depends": [
         "account",
