@@ -16,7 +16,7 @@ deliberately cherry-picked to the others rather than auto-propagated.
 
 ## Modules in this repository
 
-### [unearned_revenue_recognition](./unearned_revenue_recognition) — Unearned Revenue Recognition on Delivery
+### [unearned_revenue_recognition](./unearned_revenue_recognition) — IFRS Unearned Revenue Recognition on Delivery
 
 Defers revenue recognition from invoice posting to physical delivery, in line
 with **IFRS 15 / ASC 606**. Customers are invoiced (often paid) upfront for

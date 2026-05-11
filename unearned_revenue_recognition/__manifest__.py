@@ -1,5 +1,5 @@
 {
-    "name": "Unearned Revenue Recognition on Delivery (IFRS 15 / ASC 606)",
+    "name": "IFRS Unearned Revenue Recognition on Delivery (IFRS 15 / ASC 606)",
     "version": "19.0.1.1.0",
     "category": "Accounting/Accounting",
     "summary": (
@@ -8,7 +8,7 @@
         "revenue, returns, credit notes, multi-currency, multi-company."
     ),
     "description": """
-Unearned Revenue Recognition on Delivery — IFRS 15 / ASC 606
+IFRS Unearned Revenue Recognition on Delivery — IFRS 15 / ASC 606
 =============================================================
 
 Defer revenue recognition from invoice posting to physical delivery, in line

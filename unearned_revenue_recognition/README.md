@@ -1,4 +1,4 @@
-# Unearned Revenue Recognition on Delivery
+# IFRS Unearned Revenue Recognition on Delivery
 
 Generic, reusable Odoo 19 module that defers revenue recognition from invoice
 posting to physical delivery in line with IFRS 15 / ASC 606. Built for retail
