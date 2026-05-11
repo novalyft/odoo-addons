@@ -1,6 +1,18 @@
-# Odoo 19 Custom Addons by Novalyft Solutions
+# Odoo Custom Addons by Novalyft Solutions
 
-Open-source Odoo 19 modules maintained by [Novalyft Solutions](https://novalyftsolutions.com).
+Open-source Odoo modules maintained by [Novalyft Solutions](https://novalyftsolutions.com).
+
+## Branches
+
+Following the standard Odoo / OCA convention, this repository uses **one
+branch per Odoo major version**:
+
+- [`19.0`](https://github.com/novalyft/odoo-addons/tree/19.0) — current default
+- Future: `20.0`, `21.0`, …
+
+Check out the branch matching your Odoo version before installing. Each
+version branch is independently maintained — fixes to one are
+deliberately cherry-picked to the others rather than auto-propagated.
 
 ## Modules in this repository
 
@@ -30,9 +42,9 @@ detailed configuration, walkthrough, and accounting pattern.
 
 ## Installation
 
-1. Clone this repository to a path Odoo can read:
+1. Clone the branch that matches your Odoo version:
    ```bash
-   git clone https://github.com/novalyft/odoo-addons.git
+   git clone -b 19.0 https://github.com/novalyft/odoo-addons.git
    ```
 2. Add the repository path to your Odoo `addons_path`:
    ```
@@ -41,8 +53,9 @@ detailed configuration, walkthrough, and accounting pattern.
 3. Restart Odoo with `-u all` or `-i <module_name>` and install via the Apps
    menu.
 
-On **Odoo.sh**, link this repo to your project; modules become available
-automatically once the build completes.
+On **Odoo.sh**, link this repo to your project and configure it to track
+the `19.0` branch. Modules become available automatically once the build
+completes.
 
 ## License
 
