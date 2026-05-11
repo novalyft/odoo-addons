@@ -164,14 +164,49 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 </section>
 
 <!-- ============================================================
-     Pattern diagram screenshot
+     Screenshots
      ============================================================ -->
-<section style="padding:36px 16px;text-align:center;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
-    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;text-align:left;">
-        The accounting pattern at a glance
+<section style="padding:36px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:24px;">
+        See it in action
     </h2>
-    <img src="main_screenshot.png" alt="Revenue recognition pattern: invoice posts to unearned revenue, delivery posts to sales revenue, returns reverse"
-         style="max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);"/>
+
+    <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Sales Order — recognized vs. pending at a glance</h3>
+    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+        Every Sales Order shows Recognized Revenue, Pending Recognition, and a status
+        badge (not started / partial / complete) in the header. The
+        <strong>Recognition</strong> smart button opens the full audit trail filtered
+        to this order.
+    </p>
+    <img src="sale_order_recognition_screenshot.png" alt="Sales Order S00048 with Recognition smart button, Recognized Revenue and Pending Recognition fields, and the Partial status badge"
+         style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);margin-bottom:36px;"/>
+
+    <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Per-product recognition method</h3>
+    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+        Choose Automatic (goods → on delivery, services → on invoice),
+        Recognize on invoice posting, or Recognize on delivery. The setting lives on
+        each product's Accounting tab so you can override the auto behavior per SKU.
+    </p>
+    <img src="product_revenue_method_screenshot.png" alt="Product form Accounting tab showing the Revenue Recognition Method dropdown with three options"
+         style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);margin-bottom:36px;"/>
+
+    <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Company-wide defaults in Accounting Settings</h3>
+    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+        Set a fallback Unearned Revenue account and the recognition Misc journal under
+        Accounting → Configuration → Settings → Customer Invoices. The fallback chain
+        (category → company → Enterprise native) is documented above.
+    </p>
+    <img src="accounting_settings_screenshot.png" alt="Accounting Settings page showing the Unearned Revenue Recognition section with Default Unearned Revenue Account and Recognition Journal fields"
+         style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);margin-bottom:36px;"/>
+
+    <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Per-category deferral account</h3>
+    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+        The Product Category form gains an Unearned Revenue Account field. Setting it
+        overrides the company default for every product in that category — the
+        recommended granularity for retail catalogs.
+    </p>
+    <img src="product_category_screenshot.png" alt="Product Category form showing the Unearned Revenue section with the Unearned Revenue Account field"
+         style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);"/>
 </section>
 
 <!-- ============================================================

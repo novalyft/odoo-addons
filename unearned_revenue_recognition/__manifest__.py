@@ -79,7 +79,10 @@ multi-currency, multi-company, Odoo 19, Lebanon, GCC.
     ],
     "images": [
         "static/description/banner.png",
-        "static/description/main_screenshot.png",
+        "static/description/sale_order_recognition_screenshot.png",
+        "static/description/product_revenue_method_screenshot.png",
+        "static/description/accounting_settings_screenshot.png",
+        "static/description/product_category_screenshot.png",
     ],
     "price": 0.00,
     "currency": "USD",
