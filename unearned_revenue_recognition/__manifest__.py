@@ -25,7 +25,7 @@ is installed; otherwise the module silently skips that step.
     """,
     "author": "Novalyft Solutions",
     "maintainer": "Novalyft Solutions",
-    "website": "https://novalyft.com",
+    "website": "https://novalyftsolutions.com",
     "license": "LGPL-3",
     "depends": [
         "account",
