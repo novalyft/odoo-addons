@@ -32,11 +32,11 @@ detailed configuration, walkthrough, and accounting pattern.
 
 1. Clone this repository to a path Odoo can read:
    ```bash
-   git clone https://github.com/novalyft/odoo-unearned-revenue-recognition.git
+   git clone https://github.com/novalyft/odoo-addons.git
    ```
 2. Add the repository path to your Odoo `addons_path`:
    ```
-   addons_path = ...,/path/to/odoo-unearned-revenue-recognition
+   addons_path = ...,/path/to/odoo-addons
    ```
 3. Restart Odoo with `-u all` or `-i <module_name>` and install via the Apps
    menu.
