@@ -14,6 +14,10 @@ class TestMultiCurrency(TestRevenueRecognitionCommon):
         if cls.company.currency_id == cls.foreign_currency:
             cls.foreign_currency = cls.env.ref("base.GBP")
 
+        # Base currencies are inactive by default in test DBs; activate it
+        # before posting any document in this currency.
+        cls.foreign_currency.active = True
+
         # Set rates at invoice date and (different) delivery date.
         cls.env["res.currency.rate"].search([
             ("currency_id", "=", cls.foreign_currency.id),

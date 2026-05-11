@@ -49,73 +49,13 @@ class StockPicking(models.Model):
             picking._reverse_revenue_recognition()
         return res
 
-    # TYPE: behavioral_change
-    def action_cancel(self):
-        """When a picking is cancelled, reverse any revenue-recognition entries
-        it generated so the books stay balanced.
-
-        - TYPE: behavioral_change
-        Iterates the (non-reversal) audit-trail rows linked to self, groups by their
-        recognition account.move, calls account.move._reverse_moves with today's date,
-        then writes mirror x.revenue.recognition.line rows with is_reversal=True.
-        """
-        # Capture recognition state BEFORE super runs (it may break links).
-        to_reverse_by_picking = {}
-        for picking in self:
-            recognition_lines = self.env["x.revenue.recognition.line"].search([
-                ("picking_id", "=", picking.id),
-                ("is_reversal", "=", False),
-            ])
-            posted_moves = recognition_lines.account_move_id.filtered(
-                lambda m: m.state == "posted"
-            )
-            if posted_moves:
-                to_reverse_by_picking[picking.id] = (recognition_lines, posted_moves)
-
-        res = super().action_cancel()
-
-        for picking_id, (orig_lines, moves) in to_reverse_by_picking.items():
-            picking = self.browse(picking_id)
-            try:
-                with self.env.cr.savepoint():
-                    reverse_moves = moves._reverse_moves(
-                        default_values_list=[
-                            {"date": fields.Date.context_today(picking)} for _m in moves
-                        ]
-                    )
-                    # Pair each original recognition line with a mirror reversal row,
-                    # pointing at the closest reverse move (one reverse per source move).
-                    move_to_reverse = dict(zip(moves.ids, reverse_moves.ids))
-                    for line in orig_lines:
-                        self.env["x.revenue.recognition.line"].create({
-                            "picking_id": picking.id,
-                            "move_id": line.move_id.id,
-                            "sale_line_id": line.sale_line_id.id,
-                            "invoice_line_id": line.invoice_line_id.id,
-                            "account_move_id": move_to_reverse[line.account_move_id.id],
-                            "quantity": line.quantity,
-                            "amount_company_currency": line.amount_company_currency,
-                            "amount_invoice_currency": line.amount_invoice_currency,
-                            "recognition_date": fields.Date.context_today(picking),
-                            "is_reversal": True,
-                            "company_id": line.company_id.id,
-                            "invoice_currency_id": line.invoice_currency_id.id,
-                        })
-                    picking.message_post(
-                        body=_(
-                            "Revenue recognition reversed on cancellation: %s",
-                            ", ".join(reverse_moves.mapped("name")),
-                        )
-                    )
-            except Exception as exc:  # noqa: BLE001
-                _logger.exception(
-                    "Revenue recognition reversal failed on cancel for picking %s",
-                    picking.name,
-                )
-                picking.message_post(
-                    body=_("Failed to reverse revenue recognition: %s", exc)
-                )
-        return res
+    # Note on FR7 (picking cancellation): Odoo 19's stock.move._action_cancel raises
+    # UserError when any move in the picking is in 'done' state. Because revenue
+    # recognition fires from _action_done (post-super), every recognized picking is
+    # already 'done' by the time it could be cancelled — so action_cancel can never
+    # reach our reversal code. To undo a delivery, users must create a return picking;
+    # _reverse_revenue_recognition handles that path. Invoice-side cancellation
+    # (button_draft / button_cancel) is handled by account_move._reverse_linked_revenue_recognition.
 
     def action_view_revenue_recognition_lines(self):
         self.ensure_one()

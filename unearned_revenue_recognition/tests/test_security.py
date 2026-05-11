@@ -51,7 +51,7 @@ class TestSecurity(TestRevenueRecognitionCommon):
         for move in picking.move_ids:
             move.quantity = move.product_uom_qty
             move.picked = True
-        picking.sudo().button_validate()
+        picking.sudo().with_context(skip_backorder=True).button_validate()
         return so
 
     def test_own_documents_only_isolates_recognition_lines(self):

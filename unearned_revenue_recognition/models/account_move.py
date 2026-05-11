@@ -114,6 +114,8 @@ class AccountMove(models.Model):
                             {"date": fields.Date.context_today(invoice)} for _m in posted_moves
                         ]
                     )
+                    # _reverse_moves(cancel=False) creates draft moves; post so name is sequenced.
+                    reverse_moves._post(soft=False)
                     move_to_reverse = dict(zip(posted_moves.ids, reverse_moves.ids))
                     for line in recognition_lines:
                         if line.account_move_id.id not in move_to_reverse:

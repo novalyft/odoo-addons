@@ -140,7 +140,12 @@ class TestRevenueRecognitionCommon(TestSaleStockCommon):
         return invoice
 
     def _validate_picking(self, picking, quantity=None):
-        """Validate the picking, optionally adjusting quantity on the first move."""
+        """Validate the picking, optionally adjusting quantity on the first move.
+
+        Uses skip_backorder=True so partial-qty validations bypass the
+        'Create Backorder?' confirmation wizard. Without it, button_validate
+        returns the wizard action and _action_done never fires.
+        """
         if quantity is not None:
             picking.move_ids[0].quantity = quantity
             picking.move_ids[0].picked = True
@@ -148,7 +153,7 @@ class TestRevenueRecognitionCommon(TestSaleStockCommon):
             for move in picking.move_ids:
                 move.quantity = move.product_uom_qty
                 move.picked = True
-        return picking.button_validate()
+        return picking.with_context(skip_backorder=True).button_validate()
 
     def _create_return(self, picking, quantity):
         """Build a return picking for `picking` and validate it for `quantity`."""

@@ -2,42 +2,17 @@ from .common import TestRevenueRecognitionCommon
 
 
 class TestCancellation(TestRevenueRecognitionCommon):
-    """Test 6 — cancelling a picking after recognition reverses the journal entry."""
+    """Test 6 — invoice draft / cancel reverses the recognition entry.
 
-    def test_picking_cancellation_reverses_recognition(self):
-        so = self._create_so(self.product_storable, quantity=10, price=100.0)
-        self._confirm_and_invoice(so)
-        picking = so.picking_ids
-        self._validate_picking(picking)
-
-        rec_lines = self.env["x.revenue.recognition.line"].search([
-            ("picking_id", "=", picking.id),
-            ("is_reversal", "=", False),
-        ])
-        self.assertEqual(len(rec_lines), 1)
-        orig_move = rec_lines.account_move_id
-
-        # Cancel the picking.
-        picking.action_cancel()
-
-        reversal_lines = self.env["x.revenue.recognition.line"].search([
-            ("picking_id", "=", picking.id),
-            ("is_reversal", "=", True),
-        ])
-        self.assertEqual(len(reversal_lines), 1)
-        # The reversal must be a separate, posted account.move that reverses the original.
-        self.assertNotEqual(reversal_lines.account_move_id, orig_move)
-        self.assertEqual(reversal_lines.account_move_id.state, "posted")
-        # Net P&L on Sales should now be zero.
-        sales_lines = self.env["account.move.line"].search([
-            ("account_id", "=", self.income_account.id),
-            ("parent_state", "=", "posted"),
-        ])
-        net = sum(sales_lines.mapped("credit")) - sum(sales_lines.mapped("debit"))
-        self.assertAlmostEqual(net, 0.0, places=2)
+    Note: Odoo 19 disallows cancelling a stock.picking once its moves are 'done'
+    (stock.move._action_cancel raises). Because revenue recognition only fires
+    AFTER the picking is fully done, the FR7 case of 'cancel a recognized
+    picking' is physically unreachable in Odoo 19 — to undo a delivery, users
+    must create a return, which is exercised by tests/test_returns.py.
+    """
 
     def test_invoice_reset_reverses_recognition(self):
-        """Resetting a posted invoice to draft also unwinds the recognition."""
+        """Resetting a posted invoice to draft must unwind the recognition."""
         so = self._create_so(self.product_storable, quantity=10, price=100.0)
         invoice = self._confirm_and_invoice(so)
         picking = so.picking_ids
@@ -54,4 +29,15 @@ class TestCancellation(TestRevenueRecognitionCommon):
             ("invoice_line_id", "in", invoice.invoice_line_ids.ids),
             ("is_reversal", "=", True),
         ])
-        self.assertEqual(len(reversal), len(rec_before))
+        self.assertEqual(
+            len(reversal),
+            len(rec_before),
+            "Each non-reversal recognition line must be mirrored by a reversal row.",
+        )
+        # Net sales credit on income account should be zero after reversal.
+        sales_lines = self.env["account.move.line"].search([
+            ("account_id", "=", self.income_account.id),
+            ("parent_state", "=", "posted"),
+        ])
+        net = sum(sales_lines.mapped("credit")) - sum(sales_lines.mapped("debit"))
+        self.assertAlmostEqual(net, 0.0, places=2)
