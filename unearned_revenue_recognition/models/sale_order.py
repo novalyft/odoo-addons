@@ -54,7 +54,12 @@ class SaleOrder(models.Model):
             recognized = non_reversal - reversal
 
             # Pending = posted-invoice deferred amount across all lines on this SO
-            # minus what is already recognized.
+            # minus what is already recognized. We don't filter by
+            # x_target_revenue_account_id here because credit-note lines created via
+            # _reverse_moves before x_target had copy=True would silently drop out
+            # of the math and leave the status stuck at 'partial'. sale_order_line.invoice_lines
+            # is already M2M-restricted to lines that came from this SO line, so
+            # tax/section/AR lines never appear here.
             invoiced_deferred = 0.0
             for line in order.order_line:
                 if not line.product_id:
@@ -64,7 +69,6 @@ class SaleOrder(models.Model):
                 for inv_line in line.invoice_lines.filtered(
                     lambda l: l.parent_state == "posted"
                     and l.move_id.move_type in ("out_invoice", "out_refund")
-                    and l.x_target_revenue_account_id
                 ):
                     sign = -1 if inv_line.move_id.move_type == "out_refund" else 1
                     invoiced_deferred += sign * abs(inv_line.amount_currency)
@@ -97,5 +101,4 @@ class SaleOrder(models.Model):
             "res_model": "x.revenue.recognition.line",
             "view_mode": "list,form,pivot",
             "domain": [("sale_order_id", "=", self.id)],
-            "context": {"search_default_group_by_is_reversal": 1},
         }

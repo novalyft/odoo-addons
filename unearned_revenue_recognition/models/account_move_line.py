@@ -8,10 +8,13 @@ class AccountMoveLine(models.Model):
     x_target_revenue_account_id = fields.Many2one(
         comodel_name="account.account",
         string="Target Revenue Account",
-        copy=False,
         help="The standard income account where revenue will eventually land when this invoice "
              "line is recognized via delivery. Captured at invoice line creation time so the "
-             "recognition target is frozen against later product reconfiguration.",
+             "recognition target is frozen against later product reconfiguration. The default "
+             "copy=True is intentional: when an invoice is reversed (credit note), the new line "
+             "needs to inherit this field so the SO-level recognition compute can offset the "
+             "credit note against the original invoice. Without it, a credit note would silently "
+             "drop out of the deferred-revenue math and leave the SO stuck at 'partial' status.",
     )
 
     # TYPE: behavioral_change
