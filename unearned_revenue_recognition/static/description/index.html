@@ -13,7 +13,7 @@
 <!-- ============================================================
      Hero
      ============================================================ -->
-<section style="background-color:#3C328C;color:#ffffff;padding:48px 32px;border-radius:12px;text-align:center;font-family:'Helvetica Neue',Arial,sans-serif;">
+<section style="background-color:#3C328C;color:#ffffff;padding:48px 32px;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-weight:500;">
     <h1 style="margin:0 0 12px 0;font-size:44px;font-weight:800;letter-spacing:-0.5px;line-height:1.1;color:#ffffff;">
         Unearned Revenue Recognition on Delivery
     </h1>
@@ -26,7 +26,7 @@
 <!-- ============================================================
      The problem this module solves
      ============================================================ -->
-<section style="padding:36px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
         The problem: prepayment recognizes revenue too early
     </h2>
@@ -64,7 +64,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Key features (table layout for reliable rendering on Odoo Apps)
      ============================================================ -->
-<section style="padding:36px 16px;background-color:#f8f7fc;border-radius:12px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;background-color:#f8f7fc;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:24px;">
         Key features
     </h2>
@@ -73,7 +73,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
         <tr>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Automatic redirect on invoice posting</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Invoice lines generated from a sales order are routed to an Unearned Revenue
                     liability account instead of Sales Revenue. AR, VAT, and tax accounts are
                     untouched.
@@ -81,7 +81,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Recognition on delivery</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Validating an outgoing stock picking posts a Miscellaneous journal entry
                     that moves the delivered portion from Unearned Revenue to Sales Revenue,
                     in real time.
@@ -89,7 +89,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Partial deliveries &amp; backorders</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Each picking recognizes only its proportional share. Backorders recognize
                     their portion when later validated. The audit trail tracks per-move
                     quantities so re-validation can never double-count.
@@ -99,21 +99,21 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
         <tr>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Returns auto-reverse</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Validating an incoming return picking posts the inverse entry automatically,
                     proportional to the returned quantity at the invoice's original FX rate.
                 </p>
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Credit notes protect Sales Revenue</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Credit notes against deferred invoices inherit the deferral account, so order
                     modifications never accidentally hit the P&amp;L.
                 </p>
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Multi-currency, frozen at invoice date</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Recognition entries reuse the invoice's posted FX rate via the line's
                     <code>balance</code> — no rate lookup at delivery time, no FX surprises.
                 </p>
@@ -122,7 +122,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
         <tr>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Multi-company aware</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Recognition entries post in the correct company's books with its own
                     chart of accounts. A multi-company record rule keeps audit lines scoped
                     per company.
@@ -130,7 +130,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Three-level configuration</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Set the deferral account per <em>product category</em>, fall back to a
                     <em>company-wide default</em>, fall back to Odoo Enterprise's native
                     Deferred Revenue Account. No client-specific hardcoding.
@@ -138,7 +138,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Full audit trail</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Every recognition and reversal writes a dedicated audit-trail row
                     (<code>x.revenue.recognition.line</code>) cross-linking the picking,
                     sale order, invoice, and journal entry.
@@ -148,7 +148,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
         <tr>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Smart buttons everywhere</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     The Sales Order, Customer Invoice, and Stock Picking forms each show a
                     Revenue Recognition smart button with quick access to the filtered audit
                     trail.
@@ -156,14 +156,14 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">SO recognition status</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     Recognized Revenue / Pending Recognition / Status (not_started / partial /
                     complete) on every Sales Order header — at a glance.
                 </p>
             </td>
             <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
                 <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Deferred Revenue report</h3>
-                <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4378;">
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
                     New menu under <em>Accounting → Reporting → Deferred Revenue</em> lists
                     all posted invoice lines still parked in deferral, grouped by partner.
                 </p>
@@ -176,13 +176,13 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Screenshots
      ============================================================ -->
-<section style="padding:36px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:24px;">
         See it in action
     </h2>
 
     <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Sales Order — recognized vs. pending at a glance</h3>
-    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+    <p style="font-size:15px;line-height:1.55;color:#2e2860;margin:0 0 12px 0;">
         Every Sales Order shows Recognized Revenue, Pending Recognition, and a status
         badge (not started / partial / complete) in the header. The
         <strong>Recognition</strong> smart button opens the full audit trail filtered
@@ -192,7 +192,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
          style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);margin-bottom:36px;"/>
 
     <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Per-product recognition method</h3>
-    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+    <p style="font-size:15px;line-height:1.55;color:#2e2860;margin:0 0 12px 0;">
         Choose Automatic (goods → on delivery, services → on invoice),
         Recognize on invoice posting, or Recognize on delivery. The setting lives on
         each product's Accounting tab so you can override the auto behavior per SKU.
@@ -201,7 +201,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
          style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);margin-bottom:36px;"/>
 
     <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Company-wide defaults in Accounting Settings</h3>
-    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+    <p style="font-size:15px;line-height:1.55;color:#2e2860;margin:0 0 12px 0;">
         Set a fallback Unearned Revenue account and the recognition Misc journal under
         Accounting → Configuration → Settings → Customer Invoices. The fallback chain
         (category → company → Enterprise native) is documented above.
@@ -210,7 +210,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
          style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);margin-bottom:36px;"/>
 
     <h3 style="font-size:20px;color:#3C328C;margin:18px 0 8px 0;">Per-category deferral account</h3>
-    <p style="font-size:15px;line-height:1.55;color:#4a4378;margin:0 0 12px 0;">
+    <p style="font-size:15px;line-height:1.55;color:#2e2860;margin:0 0 12px 0;">
         The Product Category form gains an Unearned Revenue Account field. Setting it
         overrides the company default for every product in that category — the
         recommended granularity for retail catalogs.
@@ -222,7 +222,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Configuration
      ============================================================ -->
-<section style="padding:36px 16px;background:#f8f7fc;border-radius:12px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;background:#f8f7fc;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
         Configure in three minutes
     </h2>
@@ -244,7 +244,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
             invoice posting, or Recognize on delivery.
         </li>
     </ol>
-    <p style="font-size:15px;line-height:1.6;color:#675d9b;">
+    <p style="font-size:15px;line-height:1.6;color:#4a4378;">
         <strong>Automatic</strong> means storable / consumable goods recognize on delivery
         and services recognize on invoice — the right default for most retail catalogs.
     </p>
@@ -253,7 +253,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Edge cases handled
      ============================================================ -->
-<section style="padding:36px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
         Edge cases the module gets right
     </h2>
@@ -274,30 +274,30 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Compatibility
      ============================================================ -->
-<section style="padding:36px 16px;background:#f8f7fc;border-radius:12px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;background:#f8f7fc;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
         Compatibility
     </h2>
     <table style="width:100%;border-collapse:collapse;font-size:15px;">
         <tbody>
         <tr style="border-bottom:1px solid #e5e2f0;">
-            <td style="padding:10px 8px;width:40%;color:#675d9b;">Odoo version</td>
+            <td style="padding:10px 8px;width:40%;color:#4a4378;">Odoo version</td>
             <td style="padding:10px 8px;"><strong>19.0</strong> (Community and Enterprise)</td>
         </tr>
         <tr style="border-bottom:1px solid #e5e2f0;">
-            <td style="padding:10px 8px;color:#675d9b;">Dependencies</td>
+            <td style="padding:10px 8px;color:#4a4378;">Dependencies</td>
             <td style="padding:10px 8px;"><code>account</code>, <code>sale_management</code>, <code>stock</code>, <code>sale_stock</code> — all standard Odoo.</td>
         </tr>
         <tr style="border-bottom:1px solid #e5e2f0;">
-            <td style="padding:10px 8px;color:#675d9b;">Enterprise integration</td>
+            <td style="padding:10px 8px;color:#4a4378;">Enterprise integration</td>
             <td style="padding:10px 8px;"><code>account_accountant</code>'s native Deferred Revenue Account is detected at runtime and used as a fallback. <strong>Not required.</strong></td>
         </tr>
         <tr style="border-bottom:1px solid #e5e2f0;">
-            <td style="padding:10px 8px;color:#675d9b;">License</td>
+            <td style="padding:10px 8px;color:#4a4378;">License</td>
             <td style="padding:10px 8px;"><strong>LGPL-3</strong></td>
         </tr>
         <tr>
-            <td style="padding:10px 8px;color:#675d9b;">Tests</td>
+            <td style="padding:10px 8px;color:#4a4378;">Tests</td>
             <td style="padding:10px 8px;">22 unit tests covering invoice routing, recognition triggers, partial deliveries, returns, credit notes, idempotency, multi-currency, services, taxes, multi-invoice, security, and dropship.</td>
         </tr>
         </tbody>
@@ -307,7 +307,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Who it's for
      ============================================================ -->
-<section style="padding:36px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
         Who is this for?
     </h2>
@@ -324,7 +324,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Limitations (transparent)
      ============================================================ -->
-<section style="padding:36px 16px;background:#fff5ef;border:1px solid #f7c8ac;border-radius:12px;font-family:'Helvetica Neue',Arial,sans-serif;color:#1f1947;">
+<section style="padding:36px 16px;background:#fff5ef;border:1px solid #f7c8ac;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
     <h2 style="font-size:24px;color:#B83D0F;margin:0 0 12px 0;">Known limitations</h2>
     <ul style="font-size:15px;line-height:1.65;padding-left:22px;color:#7a3210;margin:0;">
         <li><strong>No time-based deferral.</strong> Use Odoo's native Enterprise Deferred Revenue feature for annual contracts, subscriptions, or prepaid hours.</li>
@@ -337,7 +337,7 @@ ON RETURN:         Dr  Sales Revenue           Cr  Unearned Revenue  (auto rever
 <!-- ============================================================
      Footer / author
      ============================================================ -->
-<section style="margin-top:36px;padding:32px 24px;background-color:#3C328C;color:#ffffff;border-radius:12px;text-align:center;font-family:'Helvetica Neue',Arial,sans-serif;">
+<section style="margin-top:36px;padding:32px 24px;background-color:#3C328C;color:#ffffff;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-weight:500;">
     <h2 style="margin:0 0 8px 0;font-size:22px;color:#ffffff;">Built by Novalyft Solutions</h2>
     <p style="margin:0 0 4px 0;font-size:15px;color:#ffffff;">
         We build Odoo implementations and modules for the Levant, GCC, and beyond.
