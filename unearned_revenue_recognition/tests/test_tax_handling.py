@@ -9,13 +9,29 @@ class TestTaxHandling(TestRevenueRecognitionCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Create a 15% sales tax (default sales tax may not be present in all chart templates).
+        # Dedicated tax-payable account so the tax line does NOT inherit the
+        # product line's account (which would be the deferral account after our redirect).
+        cls.tax_account = cls.env["account.account"].create({
+            "name": "Test Tax Payable",
+            "code": cls._next_account_code("251"),
+            "account_type": "liability_current",
+            "company_ids": [Command.link(cls.company.id)],
+        })
+        # 15% sales tax with an explicit account on its tax-repartition line.
         cls.tax_15 = cls.env["account.tax"].create({
             "name": "Test Sales Tax 15%",
             "amount": 15.0,
             "amount_type": "percent",
             "type_tax_use": "sale",
             "company_id": cls.company.id,
+            "invoice_repartition_line_ids": [
+                Command.create({"document_type": "invoice", "repartition_type": "base"}),
+                Command.create({"document_type": "invoice", "repartition_type": "tax", "account_id": cls.tax_account.id}),
+            ],
+            "refund_repartition_line_ids": [
+                Command.create({"document_type": "refund", "repartition_type": "base"}),
+                Command.create({"document_type": "refund", "repartition_type": "tax", "account_id": cls.tax_account.id}),
+            ],
         })
 
     def test_invoice_taxes_separate_from_deferral(self):

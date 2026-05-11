@@ -42,7 +42,10 @@ class AccountMove(models.Model):
         for move in self.filtered(lambda m: m.move_type == "out_invoice" and m.state == "posted"):
             warnings = []
             for line in move.invoice_line_ids:
-                if not line.product_id or line.display_type:
+                # invoice_line_ids includes section / subsection / note lines whose
+                # display_type is truthy but not 'product'. Skip those; only inspect
+                # product lines.
+                if line.display_type != "product" or not line.product_id:
                     continue
                 tmpl = line.product_id.product_tmpl_id
                 method = tmpl._get_effective_revenue_method()
