@@ -8,7 +8,7 @@ class ProductCategory(models.Model):
     x_unearned_revenue_account_id = fields.Many2one(
         comodel_name="account.account",
         string="Unearned Revenue Account",
-        domain="[('account_type', '=', 'liability_current'), ('deprecated', '=', False)]",
+        domain="[('account_type', '=', 'liability_current')]",
         company_dependent=True,
         help="Liability account where revenue is parked at invoice posting for products in "
              "this category, until physical delivery moves it to the standard income account. "

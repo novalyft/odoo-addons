@@ -8,7 +8,7 @@ class ResCompany(models.Model):
     x_default_unearned_revenue_account_id = fields.Many2one(
         comodel_name="account.account",
         string="Default Unearned Revenue Account",
-        domain="[('account_type', '=', 'liability_current'), ('deprecated', '=', False)]",
+        domain="[('account_type', '=', 'liability_current')]",
         help="Liability account used by default for unearned revenue when no override is set "
              "on the product category. Acts as the second step of the deferral account fallback "
              "chain (after product category, before the native Enterprise deferred revenue setting).",

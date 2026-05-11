@@ -99,13 +99,10 @@ class RevenueRecognitionLine(models.Model):
         string="Invoice Currency",
     )
 
-    _sql_constraints = [
-        (
-            "quantity_positive",
-            "CHECK (quantity > 0)",
-            "Recognized quantity must be strictly positive.",
-        ),
-    ]
+    _quantity_positive = models.Constraint(
+        "CHECK (quantity > 0)",
+        "Recognized quantity must be strictly positive.",
+    )
 
     def _compute_display_name(self):
         for line in self:
