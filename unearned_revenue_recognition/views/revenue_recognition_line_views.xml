@@ -73,12 +73,12 @@
                         domain="[('recognition_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
                 <filter string="This Month" name="filter_this_month"
                         domain="[('recognition_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
-                <group expand="0" string="Group By">
-                    <filter string="Sales Order" name="group_by_sale_order" context="{'group_by': 'sale_order_id'}"/>
-                    <filter string="Invoice" name="group_by_invoice" context="{'group_by': 'invoice_id'}"/>
-                    <filter string="Picking" name="group_by_picking" context="{'group_by': 'picking_id'}"/>
-                    <filter string="Reversal" name="group_by_is_reversal" context="{'group_by': 'is_reversal'}"/>
-                    <filter string="Recognition Date" name="group_by_date" context="{'group_by': 'recognition_date'}"/>
+                <group>
+                    <filter string="Sales Order" name="group_by_sale_order" domain="[]" context="{'group_by': 'sale_order_id'}"/>
+                    <filter string="Invoice" name="group_by_invoice" domain="[]" context="{'group_by': 'invoice_id'}"/>
+                    <filter string="Picking" name="group_by_picking" domain="[]" context="{'group_by': 'picking_id'}"/>
+                    <filter string="Reversal" name="group_by_is_reversal" domain="[]" context="{'group_by': 'is_reversal'}"/>
+                    <filter string="Recognition Date" name="group_by_date" domain="[]" context="{'group_by': 'recognition_date'}"/>
                 </group>
             </search>
         </field>
