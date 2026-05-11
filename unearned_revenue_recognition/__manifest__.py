@@ -78,7 +78,10 @@ multi-currency, multi-company, Odoo 19, Lebanon, GCC.
         "views/menus.xml",
     ],
     "images": [
-        "static/description/banner.png",
+        # First entry doubles as the detail-page banner AND the card-cover
+        # thumbnail. The _screenshot suffix is what the Apps Store cover slot
+        # filters by — without it the cover falls through to the next image.
+        "static/description/cover_screenshot.png",
         "static/description/sale_order_recognition_screenshot.png",
         "static/description/product_revenue_method_screenshot.png",
         "static/description/accounting_settings_screenshot.png",
