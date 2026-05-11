@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_inherit_unearned_revenue" model="ir.ui.view">
+        <field name="name">sale.view_order_form.inherit.unearned.revenue</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_revenue_recognition_lines"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-money"
+                        invisible="x_recognition_line_count == 0">
+                    <field name="x_recognition_line_count" widget="statinfo" string="Recognition"/>
+                </button>
+            </div>
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="x_amount_recognized" invisible="x_recognition_line_count == 0"/>
+                <field name="x_amount_pending_recognition" invisible="x_recognition_line_count == 0"/>
+                <field name="x_recognition_status"
+                       widget="badge"
+                       decoration-success="x_recognition_status == 'complete'"
+                       decoration-warning="x_recognition_status == 'partial'"
+                       decoration-info="x_recognition_status == 'not_started'"
+                       invisible="x_recognition_line_count == 0"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

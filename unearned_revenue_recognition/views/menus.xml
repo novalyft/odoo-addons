@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action: Deferred Revenue Report on account.move.line entries on deferral accounts. -->
+    <record id="action_deferred_revenue_report" model="ir.actions.act_window">
+        <field name="name">Deferred Revenue</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">list,pivot</field>
+        <field name="domain">[
+            ('parent_state', '=', 'posted'),
+            ('account_id.account_type', '=', 'liability_current'),
+            ('move_id.move_type', 'in', ('out_invoice', 'out_refund', 'entry')),
+            ('x_target_revenue_account_id', '!=', False),
+        ]</field>
+        <field name="context">{'search_default_group_by_partner': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Deferred revenue balances by partner
+            </p>
+            <p>
+                Posted invoice lines routed to the Unearned Revenue account. Compare
+                these against the recognition entries to see remaining revenue to recognize.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_deferred_revenue_report"
+              name="Deferred Revenue"
+              parent="account.menu_finance_reports"
+              action="action_deferred_revenue_report"
+              groups="account.group_account_invoice"
+              sequence="80"/>
+
+    <!-- Optional flat menu under Accounting for browsing the audit trail. -->
+    <menuitem id="menu_x_revenue_recognition_line"
+              name="Revenue Recognition Lines"
+              parent="account.menu_finance_reports"
+              action="x_revenue_recognition_line_action"
+              groups="account.group_account_invoice"
+              sequence="85"/>
+
+</odoo>

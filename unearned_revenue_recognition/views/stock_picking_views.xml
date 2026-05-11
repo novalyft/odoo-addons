@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_form_inherit_unearned_revenue" model="ir.ui.view">
+        <field name="name">stock.view_picking_form.inherit.unearned.revenue</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_revenue_recognition_lines"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-money"
+                        invisible="x_recognition_line_count == 0">
+                    <field name="x_recognition_line_count" widget="statinfo" string="Recognition"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

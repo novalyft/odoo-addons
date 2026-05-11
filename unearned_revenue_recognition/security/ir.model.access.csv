@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rev_rec_acc_manager,revenue.recognition.line account manager,model_x_revenue_recognition_line,account.group_account_manager,1,1,1,1
+access_rev_rec_acc_invoice,revenue.recognition.line account invoice,model_x_revenue_recognition_line,account.group_account_invoice,1,1,1,0
+access_rev_rec_sale_user,revenue.recognition.line sales user,model_x_revenue_recognition_line,sales_team.group_sale_salesman,1,0,0,0

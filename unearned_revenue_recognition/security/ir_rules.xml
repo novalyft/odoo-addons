@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Multi-company rule: each user sees only recognition lines posted in their allowed companies. -->
+    <record id="revenue_recognition_line_company_rule" model="ir.rule">
+        <field name="name">Revenue Recognition Line: multi-company</field>
+        <field name="model_id" ref="model_x_revenue_recognition_line"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+    <!-- Sales / User: Own Documents Only — see only lines linked to SOs where the user is
+         the salesman. Mirrors Odoo 19's pattern on sale.order.line (sale/security/ir_rules.xml:71). -->
+    <record id="revenue_recognition_line_personal_rule" model="ir.rule">
+        <field name="name">Revenue Recognition Line: Personal</field>
+        <field name="model_id" ref="model_x_revenue_recognition_line"/>
+        <field name="domain_force">['|', ('sale_line_id.salesman_id', '=', user.id), ('sale_line_id.salesman_id', '=', False)]</field>
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+    </record>
+
+    <!-- Sales / User: All Documents — bypass the personal restriction. -->
+    <record id="revenue_recognition_line_see_all" model="ir.rule">
+        <field name="name">Revenue Recognition Line: See All</field>
+        <field name="model_id" ref="model_x_revenue_recognition_line"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+    </record>
+
+</odoo>

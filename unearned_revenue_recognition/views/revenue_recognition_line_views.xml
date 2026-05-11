@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List view -->
+    <record id="x_revenue_recognition_line_view_list" model="ir.ui.view">
+        <field name="name">x.revenue.recognition.line.list</field>
+        <field name="model">x.revenue.recognition.line</field>
+        <field name="arch" type="xml">
+            <list string="Revenue Recognition Lines"
+                  decoration-danger="is_reversal"
+                  decoration-success="not is_reversal">
+                <field name="recognition_date"/>
+                <field name="sale_order_id"/>
+                <field name="invoice_id"/>
+                <field name="picking_id"/>
+                <field name="account_move_id"/>
+                <field name="quantity"/>
+                <field name="amount_company_currency"/>
+                <field name="company_currency_id" column_invisible="True"/>
+                <field name="is_reversal" widget="boolean_toggle" readonly="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="x_revenue_recognition_line_view_form" model="ir.ui.view">
+        <field name="name">x.revenue.recognition.line.form</field>
+        <field name="model">x.revenue.recognition.line</field>
+        <field name="arch" type="xml">
+            <form string="Revenue Recognition Line" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group string="Origin">
+                            <field name="sale_order_id"/>
+                            <field name="sale_line_id"/>
+                            <field name="invoice_id"/>
+                            <field name="invoice_line_id"/>
+                            <field name="picking_id"/>
+                            <field name="move_id"/>
+                        </group>
+                        <group string="Recognition">
+                            <field name="account_move_id"/>
+                            <field name="recognition_date"/>
+                            <field name="quantity"/>
+                            <field name="amount_company_currency"/>
+                            <field name="amount_invoice_currency"/>
+                            <field name="invoice_currency_id"/>
+                            <field name="is_reversal"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="company_currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="x_revenue_recognition_line_view_search" model="ir.ui.view">
+        <field name="name">x.revenue.recognition.line.search</field>
+        <field name="model">x.revenue.recognition.line</field>
+        <field name="arch" type="xml">
+            <search string="Revenue Recognition Lines">
+                <field name="sale_order_id"/>
+                <field name="invoice_id"/>
+                <field name="picking_id"/>
+                <field name="account_move_id"/>
+                <filter string="Recognitions" name="filter_recognitions" domain="[('is_reversal', '=', False)]"/>
+                <filter string="Reversals" name="filter_reversals" domain="[('is_reversal', '=', True)]"/>
+                <separator/>
+                <filter string="Today" name="filter_today"
+                        domain="[('recognition_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="This Month" name="filter_this_month"
+                        domain="[('recognition_date', '&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Sales Order" name="group_by_sale_order" context="{'group_by': 'sale_order_id'}"/>
+                    <filter string="Invoice" name="group_by_invoice" context="{'group_by': 'invoice_id'}"/>
+                    <filter string="Picking" name="group_by_picking" context="{'group_by': 'picking_id'}"/>
+                    <filter string="Reversal" name="group_by_is_reversal" context="{'group_by': 'is_reversal'}"/>
+                    <filter string="Recognition Date" name="group_by_date" context="{'group_by': 'recognition_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Pivot view -->
+    <record id="x_revenue_recognition_line_view_pivot" model="ir.ui.view">
+        <field name="name">x.revenue.recognition.line.pivot</field>
+        <field name="model">x.revenue.recognition.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Revenue Recognition Analysis">
+                <field name="recognition_date" type="row" interval="month"/>
+                <field name="is_reversal" type="col"/>
+                <field name="amount_company_currency" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Window action -->
+    <record id="x_revenue_recognition_line_action" model="ir.actions.act_window">
+        <field name="name">Revenue Recognition Lines</field>
+        <field name="res_model">x.revenue.recognition.line</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="search_view_id" ref="x_revenue_recognition_line_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Revenue recognition audit trail
+            </p>
+            <p>
+                Every time goods are delivered and revenue is moved from the Unearned
+                Revenue account to the Sales account, a line is recorded here.
+            </p>
+        </field>
+    </record>
+
+</odoo>
