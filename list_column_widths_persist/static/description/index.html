@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Persistent List Column Widths for Odoo 19 — Remember Resized Columns</title>
+    <meta name="description"
+          content="Odoo 19 module that makes manually-resized list (tree) view column widths persist across navigation, view switches, and browser sessions — per view, for every user, with zero configuration. Works on all list views including embedded one2many / many2many lists, with a per-view Reset column widths control. Community and Enterprise."/>
+    <meta name="keywords"
+          content="Odoo 19, list view, tree view, column width, resize columns, persist column widths, remember column widths, sticky columns, localStorage, UX, productivity, web client, x2many, one2many, many2many, embedded list, zero config, Novalyft"/>
+</head>
+<body>
+<!-- ============================================================
+     Hero
+     ============================================================ -->
+<section style="background-color:#3C328C;color:#ffffff;padding:48px 32px;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-weight:500;">
+    <h1 style="margin:0 0 12px 0;font-size:44px;font-weight:800;letter-spacing:-0.5px;line-height:1.1;color:#ffffff;">
+        Persistent List Column Widths
+    </h1>
+    <p style="margin:0 auto;max-width:760px;font-size:20px;line-height:1.45;color:#ffffff;">
+        Resize a list view's columns once and Odoo remembers them — across navigation, view
+        switches, and browser reloads. Per view, for every user. Zero configuration.
+    </p>
+</section>
+
+<!-- ============================================================
+     The problem this module solves
+     ============================================================ -->
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
+        The problem: Odoo forgets your column widths
+    </h2>
+    <p style="font-size:16px;line-height:1.6;">
+        You carefully drag a list view's columns to fit your data — widen the description,
+        shrink the status — and Odoo <strong>throws that work away the moment the list renderer
+        unmounts</strong>. That happens every time you navigate to another menu, switch to kanban
+        or form and come back, reload the tab, or reopen an embedded list inside a form.
+    </p>
+    <p style="font-size:16px;line-height:1.6;">
+        The widths are computed inside Odoo's column-width hook and held only in an in-memory
+        closure that dies on unmount — so they are never saved anywhere. Power users who live in
+        large list views re-size the same columns dozens of times a day.
+    </p>
+    <pre style="background:#f5f4fb;border-left:4px solid #F15E1C;padding:14px 18px;font-size:14px;border-radius:6px;color:#1f1947;line-height:1.5;overflow:auto;">
+STOCK ODOO:   resize a column  →  navigate away / switch view / reload  →  width forgotten
+</pre>
+    <p style="font-size:16px;line-height:1.6;">
+        This module makes those widths <strong>stick</strong>. The next time the same view is
+        shown — in the same session or after a full reload — the columns come back exactly where
+        you left them:
+    </p>
+    <pre style="background:#f5f4fb;border-left:4px solid #3C328C;padding:14px 18px;font-size:14px;border-radius:6px;color:#1f1947;line-height:1.5;overflow:auto;">
+THIS MODULE:  resize a column  →  width saved per view  →  restored automatically next time  ✓
+</pre>
+    <p style="font-size:16px;line-height:1.6;">
+        It works on <strong>every list view</strong>, including one2many / many2many embedded
+        lists, with <strong>no configuration</strong> — install it and it is on for everyone.
+    </p>
+</section>
+
+<!-- ============================================================
+     See it in action
+     ============================================================ -->
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
+        See it in action
+    </h2>
+    <p style="font-size:16px;line-height:1.6;margin:0 0 22px 0;">
+        Drag a list column's header border to resize it — the width is saved for that view and
+        restored automatically the next time it is shown. A per-view <strong>Reset column
+        widths</strong> entry lives right in the list's optional-columns dropdown, so clearing
+        back to Odoo's ideal widths is one click away. No settings page, no configuration.
+    </p>
+    <img src="reset_column_widths_screenshot.png"
+         alt="Odoo 19 list view with the optional-columns dropdown open, showing the added Reset column widths entry"
+         style="display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid #e5e2f0;box-shadow:0 4px 20px rgba(60,50,140,0.12);"/>
+</section>
+
+<!-- ============================================================
+     Key features (table layout for reliable rendering on Odoo Apps)
+     ============================================================ -->
+<section style="padding:36px 16px;background-color:#f8f7fc;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:24px;">
+        Key features
+    </h2>
+    <table style="width:100%;border-collapse:separate;border-spacing:12px;table-layout:fixed;">
+        <tbody>
+        <tr>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Widths that actually persist</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    Resized column widths survive navigation, view switches, and full
+                    browser-session reloads — restored automatically the next time the view
+                    is opened.
+                </p>
+            </td>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Every list view, including x2many</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    One prototype patch on <code>ListRenderer</code> covers all list views,
+                    including one2many / many2many lists embedded inside form views. No model
+                    exclusions.
+                </p>
+            </td>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Zero configuration</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    Always on, for every user, the moment it is installed. No setting to enable,
+                    no group to grant, no per-model setup.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Per view, per user</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    Widths are keyed off Odoo's own <code>createViewKey()</code> — model, view id,
+                    x2many sub-view path, and sorted field set — so each view remembers its own
+                    layout independently.
+                </p>
+            </td>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Per-view "Reset column widths"</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    A Reset column widths entry is added to the optional-columns dropdown. It
+                    clears the saved widths for the current view and recomputes Odoo's ideal
+                    widths instantly.
+                </p>
+            </td>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Smart column-set invalidation</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    Toggling an optional column or changing the arch's fields invalidates the
+                    stored widths automatically via the hook's column-set hash — no stale layout
+                    is ever re-applied.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Window resize keeps your widths</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    Resizing the browser window re-seeds from storage and refits cleanly through
+                    Odoo's min/max + 100%-fit math — instead of discarding your manual widths as
+                    stock Odoo does.
+                </p>
+            </td>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Fails safe, never throws</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    All storage access is exception-wrapped. Private / incognito mode and quota
+                    errors degrade silently to stock behavior — never a console error.
+                </p>
+            </td>
+            <td style="width:33%;vertical-align:top;background-color:#ffffff;border:1px solid #e5e2f0;border-top:3px solid #F15E1C;border-radius:10px;padding:18px;">
+                <h3 style="margin:0 0 8px 0;color:#3C328C;font-size:17px;">Tiny, upgrade-friendly fork</h3>
+                <p style="margin:0;font-size:14px;line-height:1.55;color:#2e2860;">
+                    A small vendored fork of Odoo's column-width hook, with every change tagged
+                    <code>// NOVALYFT</code>, keeps each major-version re-sync a ~5-minute
+                    mechanical diff.
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ============================================================
+     How it works
+     ============================================================ -->
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
+        How it works
+    </h2>
+    <p style="font-size:16px;line-height:1.6;">
+        All of Odoo 19's column-width behavior lives in a single hook,
+        <code>useMagicColumnWidths</code>, consumed only by <code>ListRenderer</code>. Computed
+        widths live in a closure that dies on unmount, and any width set from outside is
+        overwritten on the next render — so an overlay approach flickers. The robust fix is to
+        teach the hook itself to remember:
+    </p>
+    <ul style="font-size:16px;line-height:1.7;padding-left:22px;">
+        <li><strong>Vendored hook fork.</strong> A byte-for-byte copy of Odoo's
+            <code>column_width_hook.js</code> that seeds the first width computation from storage
+            (hash-gated, so restored widths flow through Odoo's own min/max + 100%-fit math) and
+            saves the final widths when a resize ends. Every edit is tagged
+            <code>// NOVALYFT</code>.</li>
+        <li><strong>One prototype patch.</strong> A single patch on <code>ListRenderer</code>
+            neuters the native hook's side effects and swaps in the fork — so standard list views
+            and x2many embedded lists are all covered at once, with existing resize wiring intact.</li>
+        <li><strong>Storage keyed off <code>createViewKey()</code>.</strong> The same per-view,
+            x2many-aware identifier Odoo already uses for its optional-columns memory, so
+            persistence is per view for free and the column-set hash invalidates stale widths
+            automatically.</li>
+        <li><strong>A thin localStorage abstraction.</strong> The only place that touches
+            <code>localStorage</code>, fully exception-wrapped, leaving room for a future
+            server-sync backend behind the same three functions.</li>
+    </ul>
+</section>
+
+<!-- ============================================================
+     Compatibility
+     ============================================================ -->
+<section style="padding:36px 16px;background:#f8f7fc;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
+        Compatibility
+    </h2>
+    <table style="width:100%;border-collapse:collapse;font-size:15px;">
+        <tbody>
+        <tr style="border-bottom:1px solid #e5e2f0;">
+            <td style="padding:10px 8px;width:40%;color:#4a4378;">Odoo version</td>
+            <td style="padding:10px 8px;"><strong>19.0</strong> (Community and Enterprise)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e5e2f0;">
+            <td style="padding:10px 8px;color:#4a4378;">Dependencies</td>
+            <td style="padding:10px 8px;"><code>web</code> only — shipped with every Odoo edition.</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e5e2f0;">
+            <td style="padding:10px 8px;color:#4a4378;">Scope</td>
+            <td style="padding:10px 8px;">All list (tree) views, including one2many / many2many embedded lists. No model exclusions.</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e5e2f0;">
+            <td style="padding:10px 8px;color:#4a4378;">Persistence</td>
+            <td style="padding:10px 8px;"><code>localStorage</code> (per browser profile). No server model, no database writes, no configuration.</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e5e2f0;">
+            <td style="padding:10px 8px;color:#4a4378;">License</td>
+            <td style="padding:10px 8px;"><strong>LGPL-3</strong></td>
+        </tr>
+        <tr>
+            <td style="padding:10px 8px;color:#4a4378;">Tests</td>
+            <td style="padding:10px 8px;">Hoot unit suite (storage round-trip, restore-on-remount, hash invalidation, exact key string, RTL, quota degradation) plus a <code>web_tour</code> integration tour run from a Python <code>HttpCase</code>.</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ============================================================
+     Who it's for
+     ============================================================ -->
+<section style="padding:36px 16px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:28px;color:#3C328C;border-bottom:2px solid #3C328C;padding-bottom:8px;margin-bottom:16px;">
+        Who is this for?
+    </h2>
+    <ul style="font-size:16px;line-height:1.7;padding-left:22px;">
+        <li><strong>Power users</strong> who live in large list views and tune column widths to their data every day.</li>
+        <li><strong>Accountants and operations teams</strong> reviewing long journals, moves, orders, or stock lists where every pixel of width matters.</li>
+        <li><strong>Data-entry workflows</strong> on x2many embedded lists inside forms, where Odoo otherwise resets widths on every reopen.</li>
+        <li><strong>Anyone</strong> tired of re-dragging the same columns after every navigation or reload.</li>
+        <li><strong>Implementers and admins</strong> who want a quality-of-life UX win that is zero-config and on for the whole company instantly.</li>
+    </ul>
+</section>
+
+<!-- ============================================================
+     Limitations (transparent)
+     ============================================================ -->
+<section style="padding:36px 16px;background:#fff5ef;border:1px solid #f7c8ac;border-radius:12px;font-family:Arial,sans-serif;font-weight:500;color:#1f1947;">
+    <h2 style="font-size:24px;color:#B83D0F;margin:0 0 12px 0;">Known limitations</h2>
+    <ul style="font-size:15px;line-height:1.65;padding-left:22px;color:#7a3210;margin:0;">
+        <li><strong>Per browser profile.</strong> Widths are stored in <code>localStorage</code>, so they are scoped to the browser profile on a machine and do not sync across devices or browsers. A server-sync backend is possible in a future version — the storage layer is already abstracted for it.</li>
+        <li><strong>No admin defaults.</strong> There is no admin-defined, org-wide default column width; each user shapes their own views.</li>
+        <li><strong>No per-user toggle.</strong> The behavior is always on, by design — there is no per-user enable/disable switch.</li>
+        <li><strong>Opted-out renderers.</strong> A renderer subclass that explicitly disables magic widths is out of scope; no standard Odoo renderer does this.</li>
+    </ul>
+</section>
+
+<!-- ============================================================
+     Footer / author
+     ============================================================ -->
+<section style="margin-top:36px;padding:32px 24px;background-color:#3C328C;color:#ffffff;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-weight:500;">
+    <h2 style="margin:0 0 8px 0;font-size:22px;color:#ffffff;">Built by Novalyft Solutions</h2>
+    <p style="margin:0 0 4px 0;font-size:15px;color:#ffffff;">
+        We build Odoo implementations and modules for the Levant, GCC, and beyond.
+    </p>
+    <p style="margin:0;font-size:14px;color:#ffffff;">
+        Visit <a href="https://novalyftsolutions.com" style="color:#F15E1C;text-decoration:underline;font-weight:600;">novalyftsolutions.com</a>
+        &nbsp;·&nbsp; License LGPL-3 &nbsp;·&nbsp; Free and open source.
+    </p>
+</section>
+</body>
+</html>

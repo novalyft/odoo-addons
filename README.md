@@ -16,6 +16,31 @@ deliberately cherry-picked to the others rather than auto-propagated.
 
 ## Modules in this repository
 
+### [list_column_widths_persist](./list_column_widths_persist) — Persistent List Column Widths
+
+Makes manually-resized list (tree) view column widths **persist** across
+navigation, view switches, and browser sessions — per view, for every user,
+with no configuration required. Standard Odoo 19 forgets a column's resized
+width the moment the list renderer unmounts; this module remembers it in the
+browser and restores it the next time the view is shown.
+
+**Highlights**
+
+- Works on every list view, including embedded one2many / many2many lists — one
+  prototype patch on `ListRenderer`, no model exclusions.
+- Survives navigation, view switches, and full browser-session reloads.
+- Widths keyed off Odoo's own `createViewKey()`; column-set changes invalidate
+  stored widths automatically.
+- Per-view **Reset column widths** entry in the optional-columns dropdown.
+- Zero configuration — always on, for every user.
+- Private-mode / quota-safe storage layer; degrades silently, never throws.
+- Tiny vendored hook fork (every change tagged `// NOVALYFT`) for a ~5-minute
+  per-version re-sync.
+- Compatible with **Odoo 19 Community and Enterprise** (depends on `web` only).
+
+See the [module README](./list_column_widths_persist/README.md) for the
+mechanism, installation, and per-version maintainer note.
+
 ### [unearned_revenue_recognition](./unearned_revenue_recognition) — IFRS Unearned Revenue Recognition on Delivery
 
 Defers revenue recognition from invoice posting to physical delivery, in line

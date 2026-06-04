@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Add a translatable "Reset column widths" entry to the list view's optional-columns
+         dropdown. The dropdown is made to render even on views without optional columns when a
+         saved width entry exists (see the displayOptionalFields override in list_renderer_patch.js),
+         so the reset control is reachable wherever a width was persisted. The entry is gated on the
+         presence of our hook's resetView() so it never appears on renderers that opted out. -->
+    <t t-inherit="web.ListRenderer" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_optional_columns_dropdown')]//t[@t-set-slot='content']" position="inside">
+            <t t-if="columnWidths and columnWidths.resetView">
+                <div role="separator" class="dropdown-divider"/>
+                <DropdownItem closingMode="'all'" onSelected="() => this.onResetColumnWidths()">
+                    <span class="o_list_reset_column_widths" t-esc="resetColumnWidthsLabel"/>
+                </DropdownItem>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
